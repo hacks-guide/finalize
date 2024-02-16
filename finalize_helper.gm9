@@ -1,0 +1,66 @@
+# Scriptrunner for https://3ds.hacks.guide/finalizing-setup file copying operations
+# Ver. 1.0.1 - Last modified: 2024-02-04
+
+set PREVIEW_MODE "Finalizing Setup Helper Script\n> Copying SD files..."
+
+set WRITE 0:/WRITE
+if fdummy $[WRITE] 400
+   rm -o -s 0:/WRITE
+else
+   set PREVIEW_MODE "Finalizing Setup Helper Script\n> Copying SD files... :("
+   echo "Error #24: SD is write-protected\n \nYour SD card is set to read-only.\nEnsure that the lock switch is flipped\nin the upright position.\nOtherwise, your SD card may be failing.\n \nIf this error persists, ask for help\non Discord: https://discord.gg/MWxPgEp"
+   poweroff
+end
+
+if find 0:/3ds/finalize.romfs NULL
+    cp -w -o -s 0:/3ds/finalize.romfs 0:/finalize.romfs
+    rm -o -s 0:/3ds/finalize.romfs
+end
+
+if find 0:/luma/payloads/finalize.romfs NULL
+    cp -w -o -s 0:/luma/payloads/finalize.romfs 0:/finalize.romfs
+    rm -o -s 0:/luma/payloads/finalize.romfs
+end
+
+if find 0:/luma/finalize.romfs NULL
+    cp -w -o -s 0:/luma/finalize.romfs 0:/finalize.romfs
+    rm -o -s 0:/luma/finalize.romfs
+end
+
+if find 0:/DCIM/finalize.romfs NULL
+    cp -w -o -s 0:/DCIM/finalize.romfs 0:/finalize.romfs
+    rm -o -s 0:/DCIM/finalize.romfs
+end
+
+if find "0:/Nintendo 3DS/finalize.romfs" NULL
+    echo "Information #23: finalize.romfs in wrong location\n \nfinalize.romfs is in the wrong location.\nThis script will attempt to move it.\nPlease hit <A> on the next few prompts."
+    cp -w -o -s "0:/Nintendo 3DS/finalize.romfs" 0:/finalize.romfs
+    rm -o -s "0:/Nintendo 3DS/finalize.romfs"
+end
+
+if not find 0:/finalize.romfs NULL
+    set PREVIEW_MODE "Finalizing Setup Helper Script\n> Copying SD files... :("
+    echo "Error #21: finalize.romfs not found\n \nfinalize.romfs could not be found on the SD card.\nCopy it to root of SD and try again."
+    poweroff
+end
+
+if not sha 0:/finalize.romfs F3DF0B1E6AED70A0A43BFEDEC62357565B4B646B9E6C6DD75BC01A98CE630DE4
+    set PREVIEW_MODE "Finalizing Setup Helper Script\n> Copying SD files... :("
+    echo "Error #22: finalize.romfs is invalid\n \nThe file finalize.romfs is corrupt or unreadable.\nRe-download it, copy it to root of SD, and try again."
+    poweroff
+else
+    imgmount 0:/finalize.romfs
+    if not find 0:/finalize NULL
+        mkdir 0:/finalize
+    end
+    cp -w -o -s G:/finalize 0:/finalize
+    cp -w -o -s 0:/finalize/GodMode9.firm 0:/luma/payloads/GodMode9.firm
+    if not find 0:/gm9/scripts NULL
+        mkdir 0:/gm9/scripts
+    end
+    cp -w -o -s 0:/finalize/finalize.gm9 0:/gm9/scripts/finalize.gm9
+    rm -o -s 0:/luma/payloads/finalize_helper.firm
+    rm -o -s 0:/finalize.romfs
+end
+
+boot 0:/luma/payloads/GodMode9.firm
