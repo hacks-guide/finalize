@@ -1,8 +1,10 @@
 # Script for https://3ds.hacks.guide/finalizing-setup
-# Ver. 1.6.0 - Last modified: 2024-02-03
+# Ver. 1.7.0 - Last modified: 2024-02-18
 # GodMode9 scripts can be dangerous!
 # Visit https://gist.github.com/lilyuwuu/8a7ce43263fe498b7fb0a403ea5eaff3 to verify the integrity of this script.
 # Credits: GM9Megascript contributors ("Scripts from Plailect's Guide"), Mr. Burguers (SD card capacity check), ihaveamac (title.db stuff)
+
+rm -o -s 0:/luma/payloads/finalize_helper.firm
 
 set PREVIEW_MODE "> Checking for problems...\nAsking for permission... ---\nInstalling homebrew... ---\nCopying GodMode9 to CTRNAND... ---\nCleaning up SD card... ---\nBacking up essential.exefs... ---\nBacking up NAND... ---"
 
@@ -19,7 +21,7 @@ end
 
 if find "0:/Nintendo 3DS/$[SYSID0]/????????????????????????????????_user-id1" NULL
 	set PREVIEW_MODE "0:/finalize/img/error18.png"
-	echo "Error #18: MSET9 detected\n \nMSET9 is still installed on this console.\nYou MUST remove it before continuing.\n \nFollow the instructions here:\nhttps://tinyurl.com/RemoveMSET9\n \nIf this error persists, ask for help\non Discord: https://discord.gg/MWxPgEp"
+	echo "Error #18: MSET9 detected\n \nMSET9 is still installed on this console.\nYou MUST remove it before continuing.\nScan the QR code above for instructions.\n \nIf this error persists, ask for help\non Discord: https://discord.gg/MWxPgEp"
 	poweroff
 end
 
@@ -72,6 +74,15 @@ poweroff
 
 @SDFREE_NEXT
 
+# If INSTALLFLAG exists, show setup message that skips CIA install
+
+if find 0:/gm9/flags/INSTALLFLAG NULL
+	set PREVIEW_MODE "Checking for problems... DONE\n> Asking for permission...\nInstalling homebrew... SKIP\nCopying GodMode9 to CTRNAND... ---\nCleaning up SD card... ---\nBacking up essential.exefs... ---\nBacking up NAND... ---"
+	ask "This script will do the following:\n- Copy GodMode9 to CTRNAND\n- Remove unnecessary SD files\n- Create an essential.exefs backup\n- Create a NAND backup (~1GB)\n \nThis script may take up to\nfifteen minutes to complete.\n \nIf you're okay with this,\npress (A) to continue."
+	allow 1:
+	goto INSTALL_NEXT
+end
+
 # Check for title database
 
 if not find A:/dbs/title.db NULL
@@ -123,6 +134,8 @@ end
 
 @MAIN
 
+# Ask for consent here
+
 set PREVIEW_MODE "Checking for problems... DONE\n> Asking for permission...\nInstalling homebrew... ---\nCopying GodMode9 to CTRNAND... ---\nCleaning up SD card... ---\nBacking up essential.exefs... ---\nBacking up NAND... ---"
 
 ask "This script will do the following:\n- Install base homebrew applications\n- Copy GodMode9 to CTRNAND\n- Remove unnecessary SD files\n- Create an essential.exefs backup\n- Create a NAND backup (~1GB)\n \nThis script may take up to\nfifteen minutes to complete.\n \nIf you're okay with this,\npress (A) to continue."
@@ -170,11 +183,21 @@ end
 
 set PREVIEW_MODE "Checking for problems... DONE\nAsking for permission... DONE\nInstalling homebrew... DONE\n> Copying GodMode9 to CTRNAND...\nCleaning up SD card... ---\nBacking up essential.exefs... ---\nBacking up NAND... ---"
 
+@INSTALL_NEXT
+
+if find 0:/gm9/flags/INSTALLFLAG NULL
+	set PREVIEW_MODE "Checking for problems... DONE\nAsking for permission... DONE\nInstalling homebrew... SKIP\n> Copying GodMode9 to CTRNAND...\n> Cleaning up SD card...\nBacking up essential.exefs... ---\nBacking up NAND... ---"
+end
+
 # Copy GodMode9 to CTRNAND
 
 cp -w -o -s 0:/luma/payloads 1:/rw/luma/payloads
 
 set PREVIEW_MODE "Checking for problems... DONE\nAsking for permission... DONE\nInstalling homebrew... DONE\nCopying GodMode9 to CTRNAND... DONE\n> Cleaning up SD card...\nBacking up essential.exefs... ---\nBacking up NAND... ---"
+
+if find 0:/gm9/flags/INSTALLFLAG NULL
+	set PREVIEW_MODE "Checking for problems... DONE\nAsking for permission... DONE\nInstalling homebrew... SKIP\nCopying GodMode9 to CTRNAND... ---\n> Cleaning up SD card...\nBacking up essential.exefs... ---\nBacking up NAND... ---"
+end
 
 # Remove unnecessary SD files
 
@@ -279,6 +302,10 @@ rm -o -s 0:/errors.txt
 
 set PREVIEW_MODE "Checking for problems... DONE\nAsking for permission... DONE\nInstalling homebrew... DONE\nCopying GodMode9 to CTRNAND... DONE\nCleaning up SD card... DONE\n> Backing up essential.exefs...\nBacking up NAND... ---"
 
+if find 0:/gm9/flags/INSTALLFLAG NULL
+	set PREVIEW_MODE "Checking for problems... DONE\nAsking for permission... DONE\nInstalling homebrew... SKIP\nCopying GodMode9 to CTRNAND... DONE\nCleaning up SD card... DONE\n> Backing up essential.exefs...\n> Backing up NAND... ---"
+end
+
 # Backup essential.exefs
 
 if not find 0:/gm9/backups NULL
@@ -289,6 +316,9 @@ cp -w S:/essential.exefs $[OUTPATH]
 
 set PREVIEW_MODE "Checking for problems... DONE\nAsking for permission... DONE\nInstalling homebrew... DONE\nCopying GodMode9 to CTRNAND... DONE\nCleaning up SD card... DONE\nBacking up essential.exefs... DONE\n> Backing up NAND..."
 
+if find 0:/gm9/flags/INSTALLFLAG NULL
+	set PREVIEW_MODE "Checking for problems... DONE\nAsking for permission... DONE\nInstalling homebrew... SKIP\nCopying GodMode9 to CTRNAND... DONE\nCleaning up SD card... DONE\nBacking up essential.exefs... DONE\n> Backing up NAND... ---"
+end
 
 # NAND backup
 
@@ -324,6 +354,10 @@ end
 if not find 0:/gm9/flags NULL
 	mkdir 0:/gm9/flags
 end
+if find 0:/gm9/flags/BACKUPFLAG NULL
+	rm -o -s 0:/gm9/flags/BACKUPFLAG
+end
+	
 set BACKUPFLAG 0:/gm9/flags/BACKUPFLAG
 if not fdummy $[BACKUPFLAG] 400
 	set PREVIEW_MODE "0:/finalize/img/error15.png"
@@ -337,28 +371,39 @@ poweroff
 
 @CLEANUP # Self-removes script and remove script flags
 
+if find 0:/gm9/flags/INSTALLFLAG NULL
+	set PREVIEW_MODE "Checking for problems... DONE\nAsking for permission... DONE\nInstalling homebrew... SKIP\nCopying GodMode9 to CTRNAND... DONE\nCleaning up SD card... DONE\nBacking up essential.exefs... DONE\nBacking up NAND... DONE"
+	goto INSTALLSKIP
+end
+
 cp -w 0:/finalize/GM9Megascript.gm9 0:/gm9/scripts/GM9Megascript.gm9
 rm -o -s 0:/gm9/scripts/finalize.gm9
-rm -o -s 0:/gm9/flags
 rm -o -s 0:/finalize.romfs
 
 set PREVIEW_MODE "0:/finalize/img/complete.png"
 
 echo "Success: Setup complete! :D\n \nRemember to backup the contents of\nSD:/gm9/backups to somewhere safe."
 rm -o -s 0:/finalize
+rm -o -s 0:/gm9/flags
+
 poweroff
 
 @BACKUPSKIP
 
 cp -w 0:/finalize/GM9Megascript.gm9 0:/gm9/scripts/GM9Megascript.gm9
 rm -o -s 0:/gm9/scripts/finalize.gm9
-rm -o -s 0:/gm9/flags
 rm -o -s 0:/finalize.romfs
 
 set PREVIEW_MODE "0:/finalize/img/complete_backupflag.png"
 
-echo "Success: Setup complete! :D\n \nRemember to backup the contents of\nSD:/gm9/backups to somewhere safe.\n \nWARNING: NAND backup automatically skipped \ndue to existing backup!\nIf you need to make another backup,\nfollow these instructions:\nhttps://tinyurl.com/gm9nandbackup"
+if find 0:/gm9/flags/INSTALLFLAG NULL
+	echo "Success: Setup complete! :D\n \nRemember to backup the contents of\nSD:/gm9/backups to somewhere safe.\n \nWARNING: NAND backup automatically skipped!\nIf you need to make another backup,\nfollow these instructions:\nhttps://tinyurl.com/gm9nandbackup\nWARNING: CIA install skipped by user request!"
+else
+	echo "Success: Setup complete! :D\n \nRemember to backup the contents of\nSD:/gm9/backups to somewhere safe.\n \nWARNING: NAND backup automatically skipped!\nIf you need to make another backup,\nfollow these instructions:\nhttps://tinyurl.com/gm9nandbackup"
+end
+
 rm -o -s 0:/finalize
+rm -o -s 0:/gm9/flags
 poweroff
 
 @BACKUPDUPE
@@ -367,5 +412,19 @@ set PREVIEW_MODE "0:/finalize/img/error17.png"
 
 ask "Information #17: Duplicate NAND backup\nIt looks like you've already made a NAND backup.\n \nIf you want to install homebrew applications,\nyou should copy your NAND backup from\nSD:/gm9/backups to a safe location on your computer,\ndelete the backup from the SD card, and\ncopy the Nintendo 3DS folder back to your SD card.\n(If you've lost the folder, you can regenerate\none by opening HOME Menu with this SD inserted.)\n \nPress (A) to make another NAND backup anyway.\nPress (B) to cancel."
 goto NOSPACE
+
+@INSTALLSKIP
+
+cp -w 0:/finalize/GM9Megascript.gm9 0:/gm9/scripts/GM9Megascript.gm9
+rm -o -s 0:/gm9/scripts/finalize.gm9
+rm -o -s 0:/finalize.romfs
+
+set PREVIEW_MODE "0:/finalize/img/complete_installflag.png"
+
+echo "Success: Setup complete! :D\n \nRemember to backup the contents of\nSD:/gm9/backups to somewhere safe.\n \nWARNING: CIA install skipped by user request!"
+rm -o -s 0:/finalize
+rm -o -s 0:/gm9/flags
+
+poweroff
 
 

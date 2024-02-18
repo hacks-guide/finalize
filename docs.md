@@ -1,5 +1,5 @@
 # Troubleshooting script errors
-*As of v1.6.0 (2024/02/03)*
+*As of v1.7.0 (2024/02/18)*
 
 ## Script-integrated error checking (finalize.gm9)
 
@@ -103,7 +103,7 @@
 
 - **ERROR**: "Fatal Error #15: File creation fail"
 - **CAUSE**: 0:/gm9/flags/BACKUPFLAG could not be created
-- **FIX**: This might happen if someone runs through NOSPACE more than once, because GodMode9 will not be able to create a file if it already exists. Ensure user has a working NAND backup and if they do then they can continue normally (move NAND backup off of SD, run script as normal).
+- **FIX**: Shouldn't happen. Ensure user has a working NAND backup and if they do then they can continue normally (move NAND backup off of SD, run script as normal).
 
 ---
 
@@ -152,7 +152,14 @@
 - **ERROR**: "Error #24: SD is write-protected"
 - **CAUSE**: Script failed to write "0:/WRITE" dummy file (thus, SD is locked)
 - **FIX**: Tell user to unlock SD; if SD is unlocked, try tape-over-the-switch method, otherwise SD card is likely failing
-NOTE : You can emulate this by creating a file named WRITE with no file extension on root of SD
+- **NOTE** You can emulate this by creating a file named WRITE with no file extension on root of SD
+
+---
+
+- **ERROR**: "Error #25: Could not boot GodMode9"
+- **CAUSE**: GodMode9 could not be booted, probably it does not exist.
+- **FIX**: This likely occurs when SD space is insufficient. Free up some space and try again. Of note is that 1.0GB+ is required anyway unless NAND backup is skipped.
+- **NOTE**: This is a lazy fix to checking for free space, as doing so is difficult. This check will fail to trigger if user already has GodMode9.firm in `/luma/payloads/` (which could conceivably happen).
 
 ---
 
@@ -166,14 +173,26 @@ NOTE : You can emulate this by creating a file named WRITE with no file extensio
 
 ### BACKUPFLAG
 
-The script checks for the existence of SD:/gm9/flags/BACKUPFLAG (no file extension). If it exists, it will silently skip the NAND backup. This will be visible to the user through:
+The script checks for the existence of `SD:/gm9/flags/BACKUPFLAG` (no file extension). If it exists, it will silently skip the NAND backup. This will be visible to the user through:
 
 - The top screen displaying "Setup complete!*" with an asterisk
 - A warning symbol next to the two NAND backup files on the top screen
-- Additional text on the bottom screen highlighting that a NAND backup was not made because one already exists
+- Additional text on the bottom screen highlighting that a NAND backup was not made
 
+This is created and used by the script when a NAND backup is made without a Nintendo 3DS folder ("NOSPACE"). In such instances, BACKUPFLAG is created so that when the user re-runs GodMode9 with the Nintendo 3DS folder, sufficient space for a NAND backup is not required.
 
-### Checksums and changelog
+### INSTALLFLAG
+
+The script checks for the instance of `SD:/gm9/flags/INSTALLFLAG` (no file extension). If it exists, it will silently skip installing CIAs. This will be visible to the user through:
+
+- The top screen displaying "Setup complete!**" with two asterisks
+- Additional text on the bottom screen highlighting that CIA installation has been skipped
+
+If BACKUPFLAG is triggered at the same time, "Setup complete!*" will take priority. The bottom screen will still warn the user that CIA installation has been skipped.
+
+This flag can only be triggered by the user creating the file, and is intended to be used for debugging purposes (i.e. CIA installation works fine through GodMode9).
+
+### Checksums (finalize.gm9) and changelog
 
 For versions before migration to a Git repository, see [here](https://gist.github.com/lilyuwuu/8a7ce43263fe498b7fb0a403ea5eaff3).
 

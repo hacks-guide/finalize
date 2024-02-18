@@ -1,5 +1,5 @@
 # Scriptrunner for https://3ds.hacks.guide/finalizing-setup file copying operations
-# Ver. 1.0.1 - Last modified: 2024-02-04
+# Ver. 1.7.0 - Last modified: 2024-02-18
 
 set PREVIEW_MODE "Finalizing Setup Helper Script\n> Copying SD files..."
 
@@ -10,6 +10,37 @@ else
    set PREVIEW_MODE "Finalizing Setup Helper Script\n> Copying SD files... :("
    echo "Error #24: SD is write-protected\n \nYour SD card is set to read-only.\nEnsure that the lock switch is flipped\nin the upright position.\nOtherwise, your SD card may be failing.\n \nIf this error persists, ask for help\non Discord: https://discord.gg/MWxPgEp"
    poweroff
+end
+
+if find -f "0:/finalize (*).romfs" ROMFS
+    cp -w -o -s $[ROMFS] 0:/finalize.romfs
+    rm -o -s $[ROMFS]
+end
+
+if find -f "0:/3ds/finalize (*).romfs" ROMFS
+    cp -w -o -s $[ROMFS] 0:/finalize.romfs
+    rm -o -s $[ROMFS]
+end
+
+if find -f "0:/luma/payloads/finalize (*).romfs" ROMFS
+    cp -w -o -s $[ROMFS] 0:/finalize.romfs
+    rm -o -s $[ROMFS]
+end
+
+if find -f "0:/luma/finalize (*).romfs" ROMFS
+    cp -w -o -s $[ROMFS] 0:/finalize.romfs
+    rm -o -s $[ROMFS]
+end
+
+if find -f "0:/DCIM/finalize (*).romfs" ROMFS
+    cp -w -o -s $[ROMFS] 0:/finalize.romfs
+    rm -o -s $[ROMFS]
+end
+
+if find -f "0:/Nintendo 3DS/finalize (*).romfs" ROMFS
+    echo "Information #23: finalize.romfs in wrong location\n \nfinalize.romfs is in the wrong location.\nThis script will attempt to move it.\nPlease hit <A> on the next few prompts."
+    cp -w -o -s $[ROMFS] 0:/finalize.romfs
+    rm -o -s $[ROMFS]
 end
 
 if find 0:/3ds/finalize.romfs NULL
@@ -44,7 +75,7 @@ if not find 0:/finalize.romfs NULL
     poweroff
 end
 
-if not sha 0:/finalize.romfs F3DF0B1E6AED70A0A43BFEDEC62357565B4B646B9E6C6DD75BC01A98CE630DE4
+if not sha 0:/finalize.romfs 73F93573C74A7A9F6443C52AD6D4AD701485B55B48B008D3A3DBD1B2F651A999
     set PREVIEW_MODE "Finalizing Setup Helper Script\n> Copying SD files... :("
     echo "Error #22: finalize.romfs is invalid\n \nThe file finalize.romfs is corrupt or unreadable.\nRe-download it, copy it to root of SD, and try again."
     poweroff
@@ -59,8 +90,10 @@ else
         mkdir 0:/gm9/scripts
     end
     cp -w -o -s 0:/finalize/finalize.gm9 0:/gm9/scripts/finalize.gm9
-    rm -o -s 0:/luma/payloads/finalize_helper.firm
     rm -o -s 0:/finalize.romfs
 end
 
-boot 0:/luma/payloads/GodMode9.firm
+if not boot 0:/luma/payloads/GodMode9.firm
+   echo "Error #25: Could not boot GodMode9\n \nThis normally happens due to insufficient SD space.\nPlease make at least 20MB of free space."
+   poweroff
+end
