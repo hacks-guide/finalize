@@ -23,7 +23,14 @@ if find "0:/Nintendo 3DS/$[SYSID0]/????????????????????????????????_user-id1" NU
 	set PREVIEW_MODE "0:/finalize/img/error18.png"
 	echo "Error #18: MSET9 detected\n \nMSET9 is still installed on this console.\nYou MUST remove it before continuing.\nScan the QR code above for instructions.\n \nIf this error persists, ask for help\non Discord: https://discord.gg/MWxPgEp"
 	poweroff
+
+# What is the NULL parameter here for? If I changed it, would it become a variable holding the name for the found folder?
+# Where can I read up on gm9script?
+else if find "0:/Nintendo 3DS/$[SYSID0]/????????????????????????sdmc??b9 NULL # Else if because I don't want the user to power on and have the system create another ID1
+	# Silently delete it.
+	rm -r -s $[MSET9ID1] # -s = silent? -o = ??
 end
+
 
 # Check for missing essential.exefs
 
