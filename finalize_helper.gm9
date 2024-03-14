@@ -76,7 +76,7 @@ if not find 0:/finalize.romfs NULL
     poweroff
 end
 
-if not sha 0:/finalize.romfs 73F93573C74A7A9F6443C52AD6D4AD701485B55B48B008D3A3DBD1B2F651A999
+if not sha 0:/finalize.romfs FINALIZE_SHA256SUM
     set PREVIEW_MODE "Finalizing Setup Helper Script\n> Copying SD files... :("
     echo "Error #22: finalize.romfs is invalid\n \nThe file finalize.romfs is corrupt or unreadable.\nRe-download it, copy it to root of SD, and try again."
     poweroff

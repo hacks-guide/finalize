@@ -10,6 +10,7 @@ builds/finalize.romfs: builds
 
 builds/finalize_helper.firm: builds/finalize.romfs
 	@cp finalize_helper.gm9 GodMode9/data/autorun.gm9
+	@sed -i s/FINALIZE_SHA256SUM/$(shell sha256sum $< | awk '{print $$1}')/g GodMode9/data/autorun.gm9
 	@$(MAKE) -C GodMode9 SCRIPT_RUNNER=1
 	@cp GodMode9/output/GodMode9.firm $@
 
