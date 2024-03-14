@@ -4,8 +4,9 @@
 set PREVIEW_MODE "Finalizing Setup Helper Script\n> Copying SD files..."
 
 set WRITE 0:/WRITE
+rm -o -s $[WRITE]
 if fdummy $[WRITE] 400
-   rm -o -s 0:/WRITE
+   rm -o -s $[WRITE]
 else
    set PREVIEW_MODE "Finalizing Setup Helper Script\n> Copying SD files... :("
    echo "Error #24: SD is write-protected\n \nYour SD card is set to read-only.\nEnsure that the lock switch is flipped\nin the upright position.\nOtherwise, your SD card may be failing.\n \nIf this error persists, ask for help\non Discord: https://discord.gg/MWxPgEp"
