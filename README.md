@@ -38,6 +38,28 @@ Releases are tagged for reference (based on usage in the guide). **Releases in t
 
 `finalize_helper` is not necessary unless you intend to use the RomFS build.
 
+
+## Building
+
+You need the following tools installed on your computer:
+- [3dstool](https://github.com/dnasdw/3dstool/releases/latest)
+- [devkitARM](https://devkitpro.org/wiki/Getting_Started)
+    - devkitARM is only required if you are building the FIRM, which you are going to want to anyway
+    - Install the 3DS related packages
+
+Clone the repository via the following commands:
+```
+git clone https://github.com/hacks-guide/finalize --recurse-submodules
+cd finalize
+```
+
+And build:
+```
+make
+```
+
+The romfs and FIRM will be present in the `builds` directory.
+
 ## License
 
 TBD
