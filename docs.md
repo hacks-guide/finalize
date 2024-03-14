@@ -138,7 +138,7 @@
 ---
 
 - **ERROR**: "Error #22: finalize.romfs is invalid"
-- **CAUSE**: finalize.romfs does not match finalize_helper.firm's hardcoded checksum (corrupted SD? outdated file/)
+- **CAUSE**: finalize.romfs does not match finalize_helper.firm's hardcoded checksum (corrupted SD? outdated file?)
 - **FIX**: Replace finalize.romfs with freshly downloaded copy
 
 ---
@@ -152,7 +152,6 @@
 - **ERROR**: "Error #24: SD is write-protected"
 - **CAUSE**: Script failed to write "0:/WRITE" dummy file (thus, SD is locked)
 - **FIX**: Tell user to unlock SD; if SD is unlocked, try tape-over-the-switch method, otherwise SD card is likely failing
-- **NOTE** You can emulate this by creating a file named WRITE with no file extension on root of SD
 
 ---
 
@@ -190,7 +189,7 @@ The script checks for the instance of `SD:/gm9/flags/INSTALLFLAG` (no file exten
 
 If BACKUPFLAG is triggered at the same time, "Setup complete!*" will take priority. The bottom screen will still warn the user that CIA installation has been skipped.
 
-This flag can only be triggered by the user creating the file, and is intended to be used for debugging purposes (i.e. CIA installation works fine through GodMode9).
+This flag can only be triggered by the user creating the file, and is intended to be used for debugging purposes (i.e. CIA installation works fine through FBI).
 
 ### Checksums (finalize.gm9) and changelog
 
