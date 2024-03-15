@@ -1,5 +1,5 @@
 # Troubleshooting script errors
-*As of v1.7.0 (2024/02/18)*
+*As of v1.7.1 (2024/03/15)*
 
 ## Script-integrated error checking (finalize.gm9)
 
