@@ -1,5 +1,5 @@
 # Scriptrunner for https://3ds.hacks.guide/finalizing-setup file copying operations
-# Ver. 1.10.1 - Last modified: 2024-12-31
+# Ver. 1.10.2 - Last modified: 2025-04-14
 
 set PREVIEW_MODE "Finalizing Setup Helper Script\n> Copying SD files..."
 
@@ -77,8 +77,9 @@ if not find 0:/finalize.romfs NULL
 end
 
 if not sha 0:/finalize.romfs FINALIZE_SHA256SUM
+    shaget 0:/finalize.romfs ACTUAL_SHA256SUM
     set PREVIEW_MODE "Finalizing Setup Helper Script\n> Copying SD files... :("
-    echo "Error #22: finalize.romfs is invalid\n \nThe file finalize.romfs is corrupt or unreadable.\nRe-download it, copy it to root of SD, and try again.\n \nExpected: FINALIZE_SHA256SUM"
+    echo "Error #22: finalize.romfs is invalid\n \nThe file finalize.romfs is corrupt or unreadable.\nRe-download it, copy it to root of SD, and try again.\n \nExpected: FINALIZE_SHA256SUM\nReceived: $[ACTUAL_SHA256SUM]"
     poweroff
 else
     imgmount 0:/finalize.romfs
