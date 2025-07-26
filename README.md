@@ -3,15 +3,14 @@
 Scripts relating to Finalizing Setup on https://3ds.hacks.guide/finalizing-setup.
 
 - [`/romfs/finalize/`](romfs/finalize): Files that are packed into `finalize.romfs`
-    - [`/romfs/finalize/img`](romfs/finalize/img): Images used for visual troubleshooting 
-    - [`/romfs/finalize/finalize.gm9`](romfs/finalize/finalize.gm9): Script run after `finalize_helper.gm9` that:
-        - Installs base homebrew applications to SYSNAND SD (see below for list)
-        - Copies GodMode9 to CTRNAND (`/rw/luma/payloads`)
-        - Backs up `essential.exefs` to `/gm9/backups`
-        - Deletes CFW installation files that are no longer necessary
-        - Backs up minsize NAND backup to `/gm9/backups`
-    - `/romfs/finalize/donor.db`: Empty title database used for consoles that do not have title database (i.e. no eShop software)
-- [`finalize_helper.gm9`](finalize_helper.gm9): Script that is compiled as GM9 scriptrunner (`finalize_helper.firm`); extracts `finalize.romfs`
+    - [`/romfs/finalize/img`](romfs/finalize/img): Images used for visual troubleshooting
+    - [`/romfs/finalize/donor.db`](romfs/finalize/donor.db): Empty title database used for consoles that do not have title database (i.e. no eShop software)
+- [`finalize_helper.lua`](finalize_helper.lua): Lua script that is compiled as GM9 scriptrunner (`x_finalize_helper.firm`) that:
+    - Installs base homebrew applications to SYSNAND SD (see below for list)
+    - Copies all payloads inside `/luma/payloads` on the SD card to CTRNAND (`/rw/luma/payloads`)
+    - Backs up `essential.exefs` to `/gm9/backups`
+    - Deletes CFW installation files that are no longer necessary
+    - Backs up minsize NAND backup to `/gm9/backups`
 - [`docs.md`](docs.md): Full error information / script documentation
 
 ## Bundled software
@@ -32,7 +31,7 @@ Releases are tagged for reference (based on usage in the guide). **Releases in t
 
 ### Automatically built binaries
 
-Binaries are automatically built by [GitHub Actions](https://github.com/hacks-guide/finalize/actions/). Place `finalize_helper.firm` in `/luma/payloads/` and `finalize.romfs` on root of SD.
+Binaries are automatically built by [GitHub Actions](https://github.com/hacks-guide/finalize/actions/). Place `x_finalize_helper.firm` in `/luma/payloads/` and `finalize.romfs` on root of SD.
 
 ### Manual file placement
 
