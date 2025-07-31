@@ -39,14 +39,17 @@ if not success then
 end
 pcall(fs.remove, write)
 
-local romfsCheckDirectoryList = {"0:/", "0:/3ds/", "0:/luma/payloads/", "0:/luma/", "0:/DCIM/"}
+local romfsCheckDirectoryList = {"0:", "0:/3ds", "0:/luma/payloads", "0:/luma", "0:/DCIM"}
 local filenameMatchList = {"finalize.romfs", "finalize(*).romfs", "finalize (*).romfs"}
 for _,dir in ipairs(romfsCheckDirectoryList) do
     for _,filename in ipairs(filenameMatchList) do
         local success, filesFound = pcall(fs.find_all, dir, filename)
         if success then
             for _,path in ipairs(filesFound) do
-                pcall(fs.move, dir .. path, finalizeRomfs, {no_cancel = true, silent = true, overwrite = true})
+                if path ~= "0:/finalize.romfs" then
+                    pcall(fs.remove, "0:/finalize.romfs")
+                    pcall(fs.move, path, finalizeRomfs, {no_cancel = true, silent = true, overwrite = true})
+                end
             end
         end
     end
@@ -85,3 +88,4 @@ if gotHash ~= expectedHash then
 end
 
 ui.echo("The script finished without errors.\n(This script is still in development)")
+sys.power_off()
