@@ -10,11 +10,14 @@ builds/finalize.romfs: builds
 
 builds/x_finalize_helper.firm: builds/finalize.romfs
 	@cp finalize.lua GodMode9/data/autorun.lua
-	@sed -i s/FINALIZE_SHA256SUM/$(shell sha256sum $< | awk '{print $$1}')/g GodMode9/data/autorun.lua
-	@$(MAKE) -C GodMode9 SCRIPT_RUNNER=1
+	@cp -r data/lang GodMode9/data/
+	@sha256sum $< | awk '{print $$1}' > GodMode9/data/finalize-romfs-hash
+	@$(MAKE) -C GodMode9 SCRIPT_RUNNER=1 AUTO_UNLOCK=1
 	@cp GodMode9/output/GodMode9.firm $@
 	@printf '\001' | dd conv=notrunc bs=1 seek=16 of=$@
 clean:
 	@rm -rf builds
 	@$(MAKE) -C GodMode9 clean
 	@rm GodMode9/data/autorun.lua
+	@rm GodMode9/data/finalize-romfs-hash
+	@rm -rf GodMode9/data/lang
