@@ -8,7 +8,24 @@ local lastModified = "2025-07-30"
 local json = require('json')
 local finalizeRomfs = "0:/finalize.romfs"
 
-local langCode = "en_US" -- translation support will be added later(TM)
+local langCodes = {
+    English="en_US"
+}
+
+ui.show_png("V:/language_select.png")
+
+local languageNames = {}
+for i, v in pairs(langCodes) do   
+    table.insert(languageNames, i)
+end
+
+local userSelection = ui.ask_selection("", languageNames)
+if not userSelection then
+    sys.power_off()
+end
+local languageSel = languageNames[userSelection]
+local langCode = langCodes[languageSel]
+
 local langPath = CURRDIR .. "/lang/" .. langCode .. ".json"
 local lang = json.decode(fs.read_file(langPath, 0, fs.stat(langPath).size))
 

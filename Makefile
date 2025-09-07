@@ -10,6 +10,7 @@ builds/finalize.romfs: builds
 
 builds/x_finalize_helper.firm: builds/finalize.romfs
 	@cp finalize.lua GodMode9/data/autorun.lua
+	@cp data/language_select.png GodMode9/data/
 	@cp -r data/lang GodMode9/data/
 	@sha256sum $< | awk '{print $$1}' > GodMode9/data/finalize-romfs-hash
 	@$(MAKE) -C GodMode9 SCRIPT_RUNNER=1 AUTO_UNLOCK=1
@@ -20,4 +21,5 @@ clean:
 	@$(MAKE) -C GodMode9 clean
 	@rm GodMode9/data/autorun.lua
 	@rm GodMode9/data/finalize-romfs-hash
+	@rm GodMode9/data/language_select.png
 	@rm -rf GodMode9/data/lang
