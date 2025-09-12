@@ -1,0 +1,13 @@
+{
+    "INIT_MESSAGE": "The Finalizing Setup Script is now starting...",
+    "ASK_FOR_HELP": "Ask for help on Discord:\nhttps://discord.gg/MWxPgEp",
+
+    "ERROR_00": "Error #00: Build error\nYou have encountered an error\nthat should only occur if the script\nwas built incorrectly.",
+    "ERROR_02": "Error #02: Missing essential.exefs\n \nessential.exefs does not exist.\nTry again,\nmaking sure to say Yes to the\n'Create essential files' popup.",
+    "ERROR_04": "Error #04: No space\n \nInsufficient space on SD card.\nYou need %s, but you have %s.\nMake some space, then try again.\n \nTIP: You can temporarily remove the Nintendo 3DS\nand DCIM folders from your SD card\nto make enough space.",
+    "ERROR_21": "Error #21: finalize.romfs not found\n \nfinalize.romfs could not be found on the SD card.\nCopy it to root of SD and try again.",
+    "ERROR_22": "Error #22: finalize.romfs is invalid\n \nThe file finalize.romfs is corrupt or unreadable.\nRe-download it, copy it to root of SD, and try again.\n \nExpected: %s\n \nReceived: %s",
+    "INFO_23" : "Information #23: finalize.romfs in wrong location\n \nfinalize.romfs is in the wrong location.\nThis script will attempt to move it.\nPlease hit <A> on the next few prompts.",
+    "ERROR_26": "Error #26: SD card not mounted.\n \nThis should not be possible.",
+    "ERROR_30": "Fatal Error #30: Missing console-unique files\n \nThe following files are missing from the NAND:\n%s"
+}
