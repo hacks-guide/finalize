@@ -84,6 +84,7 @@ if not sha 0:/finalize.romfs FINALIZE_SHA256SUM
 else
     imgmount 0:/finalize.romfs
     cp -w -o -s G:/finalize/GodMode9.firm 0:/luma/payloads/GodMode9.firm
+    cp -w -o -s G:/finalize/gm9 0:/gm9
     if not find 0:/gm9/scripts NULL
         mkdir 0:/gm9/scripts
     end
