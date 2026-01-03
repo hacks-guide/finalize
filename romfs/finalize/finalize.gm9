@@ -1,5 +1,5 @@
 # Script for https://3ds.hacks.guide/finalizing-setup
-# Ver. 1.10.3 - Last modified: 2025-10-28
+# Ver. 1.10.4 - Last modified: 2026-01-03
 # GodMode9 scripts can be dangerous!
 # Visit https://github.com/hacks-guide/finalize/releases to verify the integrity of this script.
 # Credits: GM9Megascript contributors ("Scripts from Plailect's Guide"), Mr. Burguers (SD card capacity check), ihaveamac (title.db stuff), J0n_b0 (MSET9 check), Naim2000 (better Nintendo 3DS folder check)
@@ -250,13 +250,13 @@ mkdir -o -s A:/dbs
 
 if not cp -w -o -s 9:/finalize/donor.db A:/dbs/title.db
 	set PREVIEW_MODE "9:/finalize/img/error12a.png"
-	echo "Error #12a: Copy title.db fail\n \nTitle database could not be copied to A:/dbs.\n(Is your SD card locked?)\n \nAsk for help on Discord:\nhttps://discord.gg/MWxPgEp"
+	echo "Error #12a: Copy title.db fail\n \nTitle database could not be copied to A:/dbs.\nYour SD card may be faulty or illegitimate.\n \nAsk for help on Discord:\nhttps://discord.gg/MWxPgEp"
 	poweroff
 end
 
 if not cp -w -o -s 9:/finalize/donor.db A:/dbs/import.db
 	set PREVIEW_MODE "9:/finalize/img/error12b.png"
-	echo "Error #12b: Copy import.db fail\n \nTitle database could not be copied to A:/dbs.\n(Is your SD card locked?)\n \nAsk for help on Discord:\nhttps://discord.gg/MWxPgEp"
+	echo "Error #12b: Copy import.db fail\n \nTitle database could not be copied to A:/dbs.\nYour SD card may be faulty or illegitimate.\n \nAsk for help on Discord:\nhttps://discord.gg/MWxPgEp"
 	poweroff
 end
 
@@ -296,31 +296,31 @@ end
 
 if not install 9:/finalize/Checkpoint.cia
 	set PREVIEW_MODE "9:/finalize/img/error14b.png"
-	echo "Error #14b: CIA install fail\n \nA CIA (Checkpoint) failed to install.\n \nAsk for help on Discord: https://discord.gg/MWxPgEp"
+	echo "Error #14b: CIA install fail\n \nA CIA (Checkpoint) failed to install.\nYour SD card may faulty or illegitimate.\n \nAsk for help on Discord: https://discord.gg/MWxPgEp"
 	poweroff
 end
 
 if not install 9:/finalize/FBI.cia
 	set PREVIEW_MODE "9:/finalize/img/error14c.png"
-	echo "Error #14c: CIA install fail\n \nA CIA (FBI) failed to install.\n \nAsk for help on Discord: https://discord.gg/MWxPgEp"
+	echo "Error #14c: CIA install fail\n \nA CIA (FBI) failed to install.\nYour SD card may faulty or illegitimate.\n \nAsk for help on Discord: https://discord.gg/MWxPgEp"
 	poweroff
 end
 
 if not install 9:/finalize/ftpd.cia
 	set PREVIEW_MODE "9:/finalize/img/error14d.png"
-	echo "Error #14d: CIA install fail\n \nA CIA (ftpd) failed to install.\n \nAsk for help on Discord: https://discord.gg/MWxPgEp"
+	echo "Error #14d: CIA install fail\n \nA CIA (ftpd) failed to install.\nYour SD card may faulty or illegitimate.\n \nAsk for help on Discord: https://discord.gg/MWxPgEp"
 	poweroff
 end
 
 if not install 9:/finalize/Homebrew_Launcher.cia
 	set PREVIEW_MODE "9:/finalize/img/error14e.png"
-	echo "Error #14e: CIA install fail\n \nA CIA (Homebrew Launcher) failed to install.\n \nAsk for help on Discord: https://discord.gg/MWxPgEp"
+	echo "Error #14e: CIA install fail\n \nA CIA (Homebrew Launcher) failed to install.\nYour SD card may faulty or illegitimate.\n \nAsk for help on Discord: https://discord.gg/MWxPgEp"
 	poweroff
 end
 
 if not install 9:/finalize/Universal-Updater.cia
 	set PREVIEW_MODE "9:/finalize/img/error14f.png"
-	echo "Error #14f: CIA install fail\n \nA CIA (Universal-Updater) failed to install.\n \nAsk for help on Discord: https://discord.gg/MWxPgEp"
+	echo "Error #14f: CIA install fail\n \nA CIA (Universal-Updater) failed to install.\nYour SD card may faulty or illegitimate.\n \nAsk for help on Discord: https://discord.gg/MWxPgEp"
 	poweroff
 end
 

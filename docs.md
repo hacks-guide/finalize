@@ -176,13 +176,13 @@
 
 ## Scriptrunner-integrated error checking (finalize_helper.firm)
 
-- **ERROR**: "Error #21: finalize.romfs not found"
+- **ERROR**: "Error #21: finalize.romfs not found" *(This error also can appear in finalize.gm9 for the same reason)*
 - **CAUSE**: finalize.romfs could not be found in any of the checked locations (SD root, 3ds, Nintendo 3DS, DCIM, luma, /luma/payloads)
 - **FIX**: Have user place finalize.romfs in the right directory
 
 ---
 
-- **ERROR**: "Error #22: finalize.romfs is invalid"
+- **ERROR**: "Error #22: finalize.romfs is invalid (or unreadable)" *(This error also can appear in finalize.gm9 for the same reason)*
 - **CAUSE**: finalize.romfs does not match finalize_helper.firm's hardcoded checksum (corrupted SD? outdated file?)
 - **FIX**: Replace finalize.romfs with freshly downloaded copy
 
@@ -206,6 +206,10 @@
 - **NOTE**: This is a lazy fix to checking for free space, as doing so is difficult. This check will fail to trigger if user already has GodMode9.firm in `/luma/payloads/` (which could conceivably happen).
 
 ---
+
+- **ERROR**: "Error #26: Failed to checksum finalize.romfs"
+- **CAUSE**: This is usually due to a faulty or illegitimate SD card.
+- **FIX**: Check the physical SD card: if it is unbranded or fake ("1024GB", Lenovo, Xiaomi, HUAWEI, etc.), it is almost certainly the problem. If no access to any other SD card, try reformatting the current one.
 
 ## Other script-related errors
 
