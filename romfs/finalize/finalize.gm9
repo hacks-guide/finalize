@@ -528,6 +528,7 @@ if find 0:/gm9/flags/INSTALLFLAG NULL
 	goto INSTALLSKIP
 end
 
+cp -w 9:/finalize/gm9/scripts/GM9Megascript.gm9 0:/gm9/scripts/GM9Megascript.gm9
 rm -o -s 0:/gm9/scripts/finalize.gm9
 rm -o -s 0:/finalize.romfs
 
@@ -541,6 +542,7 @@ poweroff
 
 @BACKUPSKIP
 
+cp -w 9:/finalize/gm9/scripts/GM9Megascript.gm9 0:/gm9/scripts/GM9Megascript.gm9
 rm -o -s 0:/gm9/scripts/finalize.gm9
 rm -o -s 0:/finalize.romfs
 
@@ -558,13 +560,14 @@ poweroff
 
 @BACKUPDUPE
 
-set PREVIEW_MODE "9:/finalize//img/error17.png"
+set PREVIEW_MODE "9:/finalize/img/error17.png"
 
 ask "Information #17: Duplicate NAND backup\nIt looks like you've already made a NAND backup.\n \nIf you want to install homebrew applications,\nyou should copy your NAND backup from\nSD:/gm9/backups to a safe location on your computer,\ndelete the backup from the SD card, and\ncopy the Nintendo 3DS folder back to your SD card.\n(If you've lost the folder, you can regenerate\none by opening HOME Menu with this SD inserted.)\n \nPress (A) to make another NAND backup anyway.\nPress (B) to cancel."
 goto NOSPACE
 
 @INSTALLSKIP
 
+cp -w 9:/finalize/gm9/scripts/GM9Megascript.gm9 0:/gm9/scripts/GM9Megascript.gm9
 rm -o -s 0:/gm9/scripts/finalize.gm9
 rm -o -s 0:/finalize.romfs
 
