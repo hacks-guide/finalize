@@ -1,5 +1,5 @@
 # Scriptrunner for https://3ds.hacks.guide/finalizing-setup file copying operations
-# Ver. 1.10.4 - Last modified: 2026-01-03
+# Ver. 1.10.4-hotfix - Last modified: 2026-01-04
 
 set PREVIEW_MODE "Finalizing Setup Helper Script\n> Copying SD files..."
 
@@ -89,7 +89,6 @@ if not sha 0:/finalize.romfs FINALIZE_SHA256SUM
 else
     imgmount 0:/finalize.romfs
     cp -w -o -s G:/finalize/GodMode9.firm 0:/luma/payloads/GodMode9.firm
-    cp -w -o -s G:/finalize/gm9/languages 0:/gm9/languages
     if not find 0:/gm9/scripts NULL
         mkdir 0:/gm9/scripts
     end

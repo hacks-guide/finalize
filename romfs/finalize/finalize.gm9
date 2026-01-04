@@ -1,5 +1,5 @@
 # Script for https://3ds.hacks.guide/finalizing-setup
-# Ver. 1.10.4 - Last modified: 2026-01-03
+# Ver. 1.10.4-hotfix - Last modified: 2026-01-04
 # GodMode9 scripts can be dangerous!
 # Visit https://github.com/hacks-guide/finalize/releases to verify the integrity of this script.
 # Credits: GM9Megascript contributors ("Scripts from Plailect's Guide"), Mr. Burguers (SD card capacity check), ihaveamac (title.db stuff), J0n_b0 (MSET9 check), Naim2000 (better Nintendo 3DS folder check)
@@ -529,6 +529,7 @@ if find 0:/gm9/flags/INSTALLFLAG NULL
 end
 
 cp -w 9:/finalize/gm9/scripts/GM9Megascript.gm9 0:/gm9/scripts/GM9Megascript.gm9
+cp -w -o -s G:/finalize/gm9/languages 0:/gm9/languages
 rm -o -s 0:/gm9/scripts/finalize.gm9
 rm -o -s 0:/finalize.romfs
 
@@ -543,6 +544,7 @@ poweroff
 @BACKUPSKIP
 
 cp -w 9:/finalize/gm9/scripts/GM9Megascript.gm9 0:/gm9/scripts/GM9Megascript.gm9
+cp -w -o -s G:/finalize/gm9/languages 0:/gm9/languages
 rm -o -s 0:/gm9/scripts/finalize.gm9
 rm -o -s 0:/finalize.romfs
 
@@ -568,6 +570,7 @@ goto NOSPACE
 @INSTALLSKIP
 
 cp -w 9:/finalize/gm9/scripts/GM9Megascript.gm9 0:/gm9/scripts/GM9Megascript.gm9
+cp -w -o -s G:/finalize/gm9/languages 0:/gm9/languages
 rm -o -s 0:/gm9/scripts/finalize.gm9
 rm -o -s 0:/finalize.romfs
 
