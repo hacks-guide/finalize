@@ -1,5 +1,5 @@
 # Scriptrunner for https://3ds.hacks.guide/finalizing-setup file copying operations
-# Ver. 1.10.4-hotfix - Last modified: 2026-01-04
+# Ver. 1.10.4-hotfix2 - Last modified: 2026-01-05
 
 set PREVIEW_MODE "Finalizing Setup Helper Script\n> Copying SD files..."
 
@@ -83,7 +83,7 @@ if not sha 0:/finalize.romfs FINALIZE_SHA256SUM
         poweroff
     else
         set PREVIEW_MODE "Finalizing Setup Helper Script\n> Copying SD files... :("
-        echo "Error #26: Failed to checksum finalize.romfs\n \nThe file checksum process failed.\nYour SD card may be faulty or illegitimate.
+        echo "Error #26: Failed to checksum finalize.romfs\n \nThe file checksum process failed.\nYour SD card may be faulty or illegitimate."
         poweroff
     end
 else
