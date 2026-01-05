@@ -83,7 +83,7 @@ if not sha 0:/finalize.romfs FINALIZE_SHA256SUM
         poweroff
     else
         set PREVIEW_MODE "Finalizing Setup Helper Script\n> Copying SD files... :("
-        echo "Error #26: Failed to checksum finalize.romfs\n \nThe file checksum process failed.\nYour SD card may be faulty or illegitimate.
+        echo "Error #26: Failed to checksum finalize.romfs\n \nThe file checksum process failed.\nYour SD card may be faulty or illegitimate."
         poweroff
     end
 else
