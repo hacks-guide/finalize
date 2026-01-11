@@ -1,0 +1,20 @@
+{
+    "checkExploit": {
+        "mset9": true,
+        "menuhax67": true
+    },
+    "apps": {
+        "Anemone3DS": true,
+        "Checkpoint": true,
+        "FBI": true,
+        "ftpd": true,
+        "Homebrew_Launcher": true,
+        "Universal-Updater": true
+    },
+    "gm9": true,
+    "payloadCopy": "GodMode9",
+    "dspDump": true,
+    "nullifyUserTimeOffset": true,
+    "nandBackup": true,
+    "copyBootFirmToNAND": false
+}

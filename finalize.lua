@@ -142,6 +142,9 @@ if (not success) or (not fs.find("S:/essential.exefs")) then
     end
 end
 
+ui.show_text("This script will make system file backups, install some homebrew applications, and finalize your CFW installation.\n\nFor more information on all the actions this script will take, go to:\nhttps://github.com/hacks-guide/finalize/blob/mane/README.md")
+ui.echo("Press (A) to continue.")
+
 local minBytes
 if CONSOLE_TYPE == "O3DS" then
     minBytes = (1024 ^ 3)
