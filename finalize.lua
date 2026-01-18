@@ -126,7 +126,7 @@ local newLangPath = "9:/finalize/lang/" .. langCode .. ".json"
 lang = json.decode(fs.read_file(newLangPath, 0, fs.stat(newLangPath).size))
 
 -- Check for missing essentials
--- BuildEssentialBackup() will return 1 (failure) if any of these files are missing. As well as nand_hdr.bin, but like lol
+-- sys.check_embedded_backup() will fail if any of these files are missing. As well as nand_hdr.bin, but like lol
 local missingEssential = ""
 
 if not (fs.find("1:/rw/sys/SecureInfo_A") or fs.find("1:/rw/sys/SecureInfo_B")) then
