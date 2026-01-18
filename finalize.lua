@@ -16,8 +16,8 @@ local langCodes = {
 ui.show_png(CURRDIR .. "/language_select.png")
 
 local languageNames = {}
-for i, v in pairs(langCodes) do   
-    table.insert(languageNames, i)
+for k, v in pairs(langCodes) do
+    table.insert(languageNames, k)
 end
 
 local userSelection = ui.ask_selection("", languageNames)
@@ -36,6 +36,16 @@ ui.show_text(lang["INIT_MESSAGE"])
 if not fs.sd_is_mounted() then
     ui.echo(string.format("%s\n \n%s", lang["ERROR_26"], lang["ASK_FOR_HELP"]))
     sys.power_off()
+end
+
+-- Check for known-fake SD cards and warn the user about it
+local sdCID = fs.read_file("M:/sd_cid.mem", 0xC, 0x3)
+sdCID = util.bytes_to_hex(sdCID)
+local fakeSDCards = {"003000", "000000", "0c0005"}
+for i, v in ipairs(fakeSDCards) do
+    if sdCID == v then
+        ui.echo(string.format("%s", lang["INFO_34"]))
+    end
 end
 
 local write = "0:/WRITE"
