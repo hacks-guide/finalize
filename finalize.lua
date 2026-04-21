@@ -201,9 +201,9 @@ if not fs.exists("A:") then
         repeat
             local success = fs.allow("0:/Nintendo 3DS", {ask_all=true})
         until success == true
-        local success = pcall(fs.move, mset9UserID1, string.sub(mset9UserID1, 50, 82), {no_cancel=true})
+        local success = pcall(fs.move, mset9UserID1, mset9UserID1:sub(1, mset9UserID1:find("_") - 1), {no_cancel=true})
         if not success then
-            finalizeUtil.error(lang["ERROR_19a"] .. " " .. lang["ASK_FOR_HELP"], "error19a", true)
+            finalizeUtil.error(lang["ERROR_19a"] .. "\n" .. lang["ASK_FOR_HELP"], "error19a", true)
         end
     end
 
@@ -217,14 +217,14 @@ if not fs.exists("A:") then
         end
         local success = pcall(fs.remove, mset9HaxID1, {recursive=true})
         if not success then
-            finalizeUtil.error(lang["ERROR_19b"] .. " " .. lang["ASK_FOR_HELP"], "error19b", true)
+            finalizeUtil.error(lang["ERROR_19b"] .. "\n" .. lang["ASK_FOR_HELP"], "error19b", true)
         end
         mset9Fixed = true
     end
 
     if mset9Fixed then
         ui.show_png("9:/finalize/img/mset9_reinsert.png")
-        fs.switch_sd(lang["SWITCH_SD"])
+        fs.sd_switch(lang["SWITCH_SD"])
         if not fs.exists("A:") then
             -- SYSID0 path exists at this point, yet not SYSNAND SD. Why?
             finalizeUtil.error(lang["ERROR_32"] .. "\n \n" .. lang["ASK_FOR_HELP"], "error32", true)

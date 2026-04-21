@@ -20,8 +20,9 @@ builds/x_finalize_helper.firm: builds/finalize.romfs
 clean:
 	@rm -rf builds
 	@$(MAKE) -C GodMode9 clean
-	@rm GodMode9/data/autorun.lua
-	@rm GodMode9/data/finalize-romfs-hash
-	@rm GodMode9/data/language_select.png
+	@rm -f GodMode9/data/autorun.lua
+	@rm -f GodMode9/data/finalize-romfs-hash
+	@rm -f GodMode9/data/language_select.png
 	@rm -rf GodMode9/data/lang
-	@rm -rf GodMode9/data/luapackages/finalizeUtil.lua
+	@rm -f GodMode9/data/luapackages/finalizeUtil.lua
+	@rm -f GodMode9/data/luapackages/configSavegame.lua
