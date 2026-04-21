@@ -44,7 +44,9 @@ sdCID = util.bytes_to_hex(sdCID)
 local fakeSDCards = {"003000", "000000", "0c0005"}
 for i, v in ipairs(fakeSDCards) do
     if sdCID == v then
-        ui.echo(string.format("%s", lang["INFO_34"]))
+        ui.show_png(CURRDIR .. "/error34.png")
+        ui.echo(lang["WARN_34"])
+        ui.show_text(lang["INIT_MESSAGE"])
     end
 end
 

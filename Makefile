@@ -11,6 +11,7 @@ builds/finalize.romfs: builds
 builds/x_finalize_helper.firm: builds/finalize.romfs
 	@cp finalize.lua GodMode9/data/autorun.lua
 	@cp data/language_select.png GodMode9/data/
+	@cp data/error34.png GodMode9/data/
 	@cp -r data/lang GodMode9/data/
 	@cp -r data/luapackages GodMode9/data/
 	@sha256sum $< | awk '{print $$1}' > GodMode9/data/finalize-romfs-hash
@@ -23,6 +24,7 @@ clean:
 	@rm -f GodMode9/data/autorun.lua
 	@rm -f GodMode9/data/finalize-romfs-hash
 	@rm -f GodMode9/data/language_select.png
+	@rm -f GodMode9/data/error34.png
 	@rm -rf GodMode9/data/lang
 	@rm -f GodMode9/data/luapackages/finalizeUtil.lua
 	@rm -f GodMode9/data/luapackages/configSavegame.lua

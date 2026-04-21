@@ -8,5 +8,5 @@
     "ERROR_22": "Error #22: finalize.romfs is invalid\n \nThe file finalize.romfs is corrupt or unreadable.\nRe-download it, copy it to root of SD, and try again.\n \nExpected: %s\n \nReceived: %s",
     "INFO_23" : "Information #23: finalize.romfs in wrong location\n \nfinalize.romfs is in the wrong location.\nThis script will attempt to move it.\nPlease hit <A> on the next few prompts.",
     "ERROR_26": "Error #26: SD card not mounted.\n \nThis should not be possible.",
-    "INFO_34" : "Information #34: SD card is counterfeit.\n \nYou should replace it with one from a reputable brand as soon as possible.\nIf you encounter errors during software installation,\n you will need to buy one from a reputable brand to complete this script."
+    "WARN_34" : "Warning #34: SD card is counterfeit.\n \nYou should replace it with one from a reputable brand\nas soon as possible, or you will experience\ndata corruption.\n \nIf you encounter errors during software installation,\nyou will need to buy one from a reputable brand to\ncomplete this script."
 }

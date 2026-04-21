@@ -18,5 +18,5 @@
     "ERROR_31": "Fatal Error #31: Missing encryption key\n \nThe system is missing movable.sed from NAND.\n(How did this happen...?)",
     "ERROR_32": "Fatal Error #32: Nintendo 3DS folder is inaccessible\n \nCould not access the Nintendo 3DS folder.\n(How did this happen..?)",
     "INFO_33": "Information #33: Empty Nintendo 3DS folder\n \nThe Nintendo 3DS folder has no data for this console.\nTurn on your console with the SD inserted,\nallow it to reach the HOME Menu, then run\nthis script again.",
-    "INFO_34" : "Information #34: SD card is counterfeit.\n \nYou should replace it with one from a reputable brand as soon as possible.\nIf you encounter errors during software installation,\n you will need to buy one from a reputable brand to complete this script."
+    "WARN_34" : "Warning #34: SD card is counterfeit.\n \nYou should replace it with one from a reputable brand\nas soon as possible, or you will experience\ndata corruption.\n \nIf you encounter errors during software installation,\nyou will need to buy one from a reputable brand to\ncomplete this script."
 }

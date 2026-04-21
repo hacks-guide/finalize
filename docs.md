@@ -172,6 +172,10 @@
 - **CAUSE**: Chances are the user created the Nintendo 3DS folder by themselves.
 - **FIX**: Boot into HOME Menu with SD inserted so that HOME Menu management data can be created. Then, re-run the script.
 
+- **ERROR**: "Warning #34: SD card is counterfeit"
+- **CAUSE**: Using a no-brand SD card with a known bad CID.
+- **FIX**: Get a good quality SD from a trusted brand.
+
 ---
 
 ## Scriptrunner-integrated error checking (finalize_helper.firm)
